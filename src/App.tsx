@@ -1,12 +1,8 @@
 import React from 'react';
 
-function App() {
-  return (
-    <div>
-      <h1>Hello World</h1>
+import Routes from './Routes';
 
-      <p>This is a paragraph.</p>
-    </div>
-  );
-}
+const App = () => {
+  return <Routes />;
+};
 export default App;

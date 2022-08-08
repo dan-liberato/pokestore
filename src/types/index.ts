@@ -1,8 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
+export type ProductItem = {
+  id?: number;
+  name?: string;
+  species?: Species;
+  base_experience?: number;
+  price?: number | string;
+  sprites?: Sprites;
+  image?: string;
+  quantity?: number;
+};
+
+export type Product = {
+  id?: any;
+  quantity?: number;
+  product: ProductItem;
+};
 export interface Pokedex {
   pokemon?: Pokemon;
 }
-
 export interface Pokemon {
   abilities?: Ability[];
   base_experience?: number;

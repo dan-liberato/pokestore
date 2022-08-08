@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { formatterPrice } from 'src/utils';
+
 import {
   CartItemContainer,
   CartItemContainerImage,
   CartItemName,
   CartItemPrice,
+  // CartItemQtd,
 } from './styles';
 
 export type CartItemProps = {
@@ -12,6 +15,7 @@ export type CartItemProps = {
     image: string;
     name: string;
     price: number;
+    quantity: number;
   };
 };
 
@@ -22,7 +26,8 @@ export const CartItem = ({ item: { image, name, price } }: CartItemProps) => {
         <img src={image} alt={name} />
       </CartItemContainerImage>
       <CartItemName>{name}</CartItemName>
-      <CartItemPrice>{price}</CartItemPrice>
+      {/* <CartItemQtd>quantidade {quantity}</CartItemQtd> */}
+      <CartItemPrice>{formatterPrice(price)}</CartItemPrice>
     </CartItemContainer>
   );
 };

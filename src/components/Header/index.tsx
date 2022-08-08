@@ -1,14 +1,37 @@
 import React from 'react';
 
-import { SearchBar } from './SearchBar';
+import { Link } from 'react-router-dom';
 
-export const Header = () => {
+import PokeBall from '../../assets/icons/pokeball.png';
+import Logo from '../../assets/images/pokemon-store.png';
+import { SearchBar } from './SearchBar';
+import {
+  HeaderContainer,
+  HeaderContent,
+  ContainerImage,
+  ToggleCart,
+} from './styles';
+
+export type Props = {
+  toggleCart: () => void;
+  open?: boolean;
+};
+
+export const Header = ({ toggleCart, open }: Props) => {
   return (
-    <header>
-      <div>
-        <h1>PokeStore</h1>
+    <HeaderContainer>
+      <HeaderContent>
+        <ContainerImage>
+          <Link to="/">
+            <img src={Logo} alt="Pokemon Store" />
+          </Link>
+        </ContainerImage>
+        <ToggleCart type="button" onClick={() => toggleCart()}>
+          {open ? 'Fechar Carrinho' : 'Ver Carrinho'}
+          <img src={PokeBall} alt="Cart" />
+        </ToggleCart>
         <SearchBar />
-      </div>
-    </header>
+      </HeaderContent>
+    </HeaderContainer>
   );
 };

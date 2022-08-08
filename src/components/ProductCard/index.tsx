@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { getPokemonDetails } from 'src/api';
+import { ProductItem } from 'src/types';
 import { formatterPrice } from 'src/utils';
 
+import { BuyButton } from '../ui/BuyButton';
 import {
-  ButtonAddToCart,
   ProductCardContainer,
   ProductCardImage,
   ProductCardInfo,
   ProductCardName,
   ProductCardPrice,
+  LinkTo,
 } from './styles';
 
 export type ProductCardProps = {
@@ -18,48 +19,54 @@ export type ProductCardProps = {
   productName?: string;
   productPrice?: number;
   productImage?: string;
-  productSpecies: string | undefined;
+  productSpecies?: string | undefined;
 };
 
 export const ProductCard = ({
-  productName,
-  productPrice,
-  productImage,
-  productId,
-  productSpecies,
-}: ProductCardProps) => {
-  const [speciesColor, setSpeciesColor] = React.useState<string>('');
-  const price = formatterPrice(productPrice || 0);
+  id,
+  name,
+  image,
+  price: productPrice,
+}: // species,
+ProductItem) => {
+  // const [speciesColor, setSpeciesColor] = React.useState<string>('');
+  const price = formatterPrice(productPrice as number);
 
-  const fetchSpecies = async () => {
-    try {
-      const data = await getPokemonDetails(productSpecies as string);
-      setSpeciesColor(data.color.name);
-    } catch (error) {
-      console.log(error);
-    }
+  // const fetchSpecies = async () => {
+  //   try {
+  //     const data = await getPokemonDetails(species?.url as string);
+  //     setSpeciesColor(data.color.name);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
-  useEffect(() => {
-    fetchSpecies();
-  }, []);
-
-  console.log(speciesColor);
+  // useEffect(() => {
+  //   fetchSpecies();
+  // }, []);
 
   return (
-    <ProductCardContainer id={String(productId)} color={speciesColor}>
-      <ProductCardImage>
-        <img src={productImage} alt={productName} />
-      </ProductCardImage>
+    <ProductCardContainer id={String(id)} color="#fff">
+      <LinkTo to={`/pokemon/${name}`}>
+        <ProductCardImage>
+          <img src={image} alt={name} />
+        </ProductCardImage>
 
-      <ProductCardInfo>
-        <ProductCardName>{productName}</ProductCardName>
-        <ProductCardPrice>{price}</ProductCardPrice>
-
-        <ButtonAddToCart>Adicionar ao Carrinho</ButtonAddToCart>
-      </ProductCardInfo>
+        <ProductCardInfo>
+          <ProductCardName>{name}</ProductCardName>
+          <ProductCardPrice>{price}</ProductCardPrice>
+        </ProductCardInfo>
+      </LinkTo>
+      <BuyButton
+        product={{
+          id,
+          name,
+          price: Number(productPrice),
+          image,
+        }}
+      />
     </ProductCardContainer>
   );
 };

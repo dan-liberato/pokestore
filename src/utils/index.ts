@@ -5,3 +5,8 @@ export const formatterPrice = (value: number) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);
+
+export const getUrlParams = (url: string) => {
+  const params = new URLSearchParams(url);
+  return params;
+};

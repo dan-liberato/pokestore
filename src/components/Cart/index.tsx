@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useCart } from 'src/context/CartContext';
+import { formatterPrice } from 'src/utils';
+
 import { CartItem } from './CartItem';
 import {
   CartButtonProceedToCheckout,
@@ -10,42 +13,26 @@ import {
   CartTotal,
 } from './styles';
 
-const items = [
-  {
-    id: 1,
-    image: 'https://picsum.photos/200/300',
-    name: 'Item 1',
-    price: 10,
-  },
-  {
-    id: 2,
-    image: 'https://picsum.photos/200/300',
-    name: 'Item 2',
-    price: 20,
-  },
-  {
-    id: 3,
-    image: 'https://picsum.photos/200/300',
-    name: 'Item 3',
-    price: 30,
-  },
-  {
-    id: 4,
-    image: 'https://picsum.photos/200/300',
-    name: 'Item 4',
-    price: 40,
-  },
-];
+export type Props = {
+  open: boolean;
+};
 
-export const Cart = () => {
+export const Cart = ({ open }: Props) => {
+  const { cart } = useCart();
+  const cartItems = Object.values(cart);
+  const total = cartItems.reduce(
+    (acc, curr) => acc + curr.quantity * Number(curr.price),
+    0
+  );
+
   return (
-    <CartContainer>
+    <CartContainer open={open}>
       <CartHeader>
         <h2>Carrinho</h2>
       </CartHeader>
 
       <CartContainerItems>
-        {items.map((item) => (
+        {cartItems?.map((item) => (
           <CartItem key={item.name} item={item} />
         ))}
       </CartContainerItems>
@@ -53,7 +40,7 @@ export const Cart = () => {
       <CartFooter>
         <CartTotal>
           <h3>Total</h3>
-          <h3>R$ 100,00</h3>
+          <h3>{formatterPrice(total)}</h3>
         </CartTotal>
         <CartButtonProceedToCheckout type="button">
           Finalizar Pedido

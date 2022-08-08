@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 
-export type CartItemProps = {
-  item: {
-    image: string;
-    name: string;
-    price: number;
-  };
-};
-
 export const CartItemContainer = styled.div`
-  width: 94%;
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px 12px;
+  padding: 9px;
   border-bottom: 1px solid rgba(0, 168, 255, 0.5);
 
   div:last-of-type {
@@ -23,8 +15,8 @@ export const CartItemContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
   }
 `;
 
@@ -37,7 +29,7 @@ export const CartItemContainerImage = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   @media (max-width: 768px) {
     width: 100%;
@@ -45,6 +37,12 @@ export const CartItemContainerImage = styled.div`
   }
 `;
 
-export const CartItemName = styled.div``;
+export const CartItemName = styled.div`
+  font-size: 0.75rem;
+`;
 
-export const CartItemPrice = styled.div``;
+export const CartItemQtd = styled.div``;
+
+export const CartItemPrice = styled.div`
+  font-size: 0.75rem;
+`;

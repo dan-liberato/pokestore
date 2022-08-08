@@ -8,7 +8,7 @@ export const CartContainer = styled.div<{ open: boolean }>`
   z-index: 3;
   border-radius: none;
   max-width: 300px;
-  min-height: min-content;
+  height: 100vh;
 
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,6 @@ export const CartContainer = styled.div<{ open: boolean }>`
 
   overflow-x: hidden;
   overflow-y: scroll;
-  height: calc(100vh - 100px);
 
   ::-webkit-scrollbar {
     width: 0.5rem;
@@ -34,6 +33,7 @@ export const CartContainer = styled.div<{ open: boolean }>`
 
   @media (min-width: 768px) {
     height: max-content;
+    min-height: 100px;
     display: flex;
     position: initial;
     border-radius: 0.5rem;

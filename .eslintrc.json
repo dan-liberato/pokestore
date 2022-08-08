@@ -32,8 +32,8 @@
       }
     ],
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
-    "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
-    "react/require-default-props": "off", // Allow non-defined react props as undefined
+    "react/destructuring-assignment": "off",
+    "react/require-default-props": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "import/order": [
